@@ -1,25 +1,34 @@
 import { useState } from 'react'
+import { useRoutes, BrowserRouter } from 'react-router-dom'
 import Home from '../Home'
 import MyOrder from '../MyOrder'
 import MyOrders from '../MyOrders'
 import Account from '../Account'
 import NotFound from '../NotFound'
 import SignIn from '../SignIn'
+import NavBar from '../../components/navbar'
 import '../../index.css'
 
-function App() {
+const AppRoutes = () => {
+  let routes = useRoutes([
+    { path: '/', element: <Home/>},
+    { path: '/my-account', element: <Account/>},
+    { path: '/my-order', element: <MyOrder/>},
+    { path: '/my-orders', element: <MyOrders/>},
+    { path: '/sign-in', element: <SignIn/>},
+    { path: '/*', element: <NotFound/>},
+  ])
+
+  return routes;
+}
+
+const App = () => {
   return (
-    <div className="bg-gray-100">
-      <h1 className="text-3xl font-bold text-center py-8 bg-red-100">
-        Bienvenido a Shopi
-      </h1>
-      <Home/>
-      <Account/>
-      <MyOrder/>
-      <MyOrders/>
-      <SignIn/>
-      <NotFound/>
-    </div>
+    <BrowserRouter>
+      <NavBar />
+      <AppRoutes />
+    </BrowserRouter>
   )
 }
-export default App
+
+export default App;
