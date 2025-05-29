@@ -1,6 +1,7 @@
 import Layout from "../../components/layout"
 import Card from "../../components/card"
 import {useState, useEffect} from "react"
+import ProductDetail from "../../components/productDetail/index"
 
 
 function Home() {
@@ -25,6 +26,7 @@ function Home() {
             })
           }
           </div>
+          <ProductDetail/>
       </Layout>
     )
   }
