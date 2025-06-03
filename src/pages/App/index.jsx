@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useRoutes, BrowserRouter } from 'react-router-dom'
+import { useRoutes, HashRouter } from 'react-router-dom'
 import Home from '../Home'
 import MyOrder from '../MyOrder'
 import MyOrders from '../MyOrders'
@@ -34,11 +34,11 @@ const AppRoutes = () => {
 const App = () => {
   return (
     <ShoppingCartProvider >
-      <BrowserRouter>
+      <HashRouter>
         <NavBar />
         <AppRoutes />
         <CheckoutSideMenu />
-      </BrowserRouter>
+      </HashRouter>
     </ShoppingCartProvider>
   )
 }
