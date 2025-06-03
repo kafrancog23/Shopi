@@ -23,7 +23,8 @@ const NavBar = () => {
                     to='/'
                     className={({isActive}) => 
                         isActive ? activeStyle : undefined
-                    } >
+                    }
+                    onClick={() => context.setSelectedCategory(null)}>
                         All
                     </NavLink>
                 </li>
@@ -32,26 +33,29 @@ const NavBar = () => {
                     to='/clothes'
                     className={({isActive}) => 
                         isActive ? activeStyle : undefined
-                    } >
+                    }
+                    onClick={() => context.setSelectedCategory('Clothes')}>
                         Clothes
                     </NavLink>
                 </li>
                 <li>
                     <NavLink 
-                    to='/electronic'
+                    to='/electronics'
                     className={({isActive}) => 
                         isActive ? activeStyle : undefined
-                    } >
-                        Electronic
+                    }
+                    onClick={() => context.setSelectedCategory('Electronics')}>
+                        Electronics
                     </NavLink>
                 </li>
                 <li>
                     <NavLink 
-                    to='/furnitures'
+                    to='/furniture'
                     className={({isActive}) => 
                         isActive ? activeStyle : undefined
-                    } >
-                        Furnitures
+                    }
+                    onClick={() => context.setSelectedCategory('Furniture')}>
+                        Furniture
                     </NavLink>
                 </li>
                 <li>
@@ -59,7 +63,8 @@ const NavBar = () => {
                     to='/toys'
                     className={({isActive}) => 
                         isActive ? activeStyle : undefined
-                    } >
+                    }
+                    onClick={() => context.setSelectedCategory('Toys')}>
                         Toys
                     </NavLink>
                 </li>
@@ -68,7 +73,8 @@ const NavBar = () => {
                     to='/others'
                     className={({isActive}) => 
                         isActive ? activeStyle : undefined
-                    } >
+                    }
+                    onClick={() => context.setSelectedCategory('Others')}>
                         Others
                     </NavLink>
                 </li>
