@@ -119,7 +119,7 @@ const NavBar = () => {
                     } >
                         <div className="flex items-center gap-1">
                             <ShoppingCartIcon className='h-6 w-6 text-black' />
-                            <span style={{ color: 'black' }}>{context.count}</span>
+                            <span style={{ color: 'black' }}>{context.cart.length}</span>
                         </div>
                     </NavLink>
                 </li>
