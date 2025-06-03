@@ -22,10 +22,12 @@ const CheckoutSideMenu = () => {
       totalPrice: totalPrice(context.cart)
     }
 
+
     context.setOrder([...context.order, orderToAdd])
     context.setCart([])
     context.setCount(0)
     context.setSearchByTitle(null);
+    context.CloseCheckoutSideMenu()
   }
 
   return (
@@ -59,7 +61,11 @@ const CheckoutSideMenu = () => {
           <span className="font-medium text-2xl">${totalPrice(context.cart)}</span>
         </p>
         <Link to="/my-orders/last">
-          <button className="bg-black py-3 text-white w-full rounded-lg" onClick={() => handleCheckout()}>
+          <button className="bg-black py-3 text-white w-full rounded-lg" 
+          onClick={() => {
+            handleCheckout()
+            context.CloseCheckoutSideMenu()}}
+            >
             Checkout
           </button>
         </Link>
