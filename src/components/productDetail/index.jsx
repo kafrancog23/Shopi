@@ -40,7 +40,7 @@ const ProductDetail = () => {
                             {context.ProductShow.description}
                         </span>
                         <span className='text-sm font-medium'>
-                            Category: {context.ProductShow.category}
+                            Category: {context.ProductShow.category?.name || 'Unknown'}
                         </span>
                     </p>
                 </div>

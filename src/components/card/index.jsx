@@ -19,9 +19,20 @@ const Card = ({ data }) => {
 
     const handleAddToCart = (e, data) => {
         e.stopPropagation();
+        if (!data || !data.id) return;
+        
+        const productToAdd = {
+            id: data.id,
+            title: data.title,
+            price: data.price,
+            category: data.category,
+            images: data.images,
+            description: data.description
+        };
+        
         setCount(prev => prev + 1);
-        setCart(prev => [...prev, data]);
-        setProductShow(data);
+        setCart(prev => [...prev, productToAdd]);
+        setProductShow(productToAdd);
         context.CloseProductDetail();
         context.OpenCheckoutSideMenu();
     };

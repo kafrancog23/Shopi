@@ -6,5 +6,11 @@ export default defineConfig({
   base: '/Shopi/',
   build: {
     outDir: 'dist',
+    assetsDir: 'assets',
+    rollupOptions: {
+      output: {
+        manualChunks: undefined
+      }
+    }
   },
 })
