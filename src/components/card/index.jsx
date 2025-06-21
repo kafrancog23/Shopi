@@ -62,7 +62,7 @@ const Card = ({ data }) => {
                     {data.category?.name}
                 </span>
                 <img 
-                    src={data.images?.[0]} 
+                    src={data.images?.[0]}
                     className='w-full h-full object-cover rounded-lg' 
                     alt={data.title} 
                 />

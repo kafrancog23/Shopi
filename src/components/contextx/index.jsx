@@ -23,12 +23,22 @@ export const ShoppingCartProvider =({children}) => {
     const [selectedCategory, setSelectedCategory] = useState(null)
 
     useEffect(() => {
-        fetch("https://api.escuelajs.co/api/v1/products")
-        .then(res => res.json())
-        .then(data => {
-            setItems(data)
-        })
-        .catch(error => console.log(error))
+        const fetchProducts = async () => {
+            try {
+                const response = await fetch("https://api.escuelajs.co/api/v1/products")
+                
+                if (!response.ok) {
+                    throw new Error(`Failed to fetch products: ${response.status}`)
+                }
+                
+                const data = await response.json()
+                setItems(data)
+            } catch (error) {
+                console.error('Error loading products:', error)
+                setItems([])
+            }
+        }
+        fetchProducts()
     }, [])
 
     const filterItemsByTitle = (items, searchByTitle) => {
@@ -67,7 +77,9 @@ export const ShoppingCartProvider =({children}) => {
 
     useEffect(() => {
         let result;
-        if (searchByTitle && selectedCategory) {
+        if (!items) {
+            result = [];
+        } else if (searchByTitle && selectedCategory) {
             result = filterBySearchOrCategory('title_and_category', searchByTitle, items, selectedCategory);
         } else if (selectedCategory) {
             result = filterBySearchOrCategory('category', null, items, selectedCategory);
