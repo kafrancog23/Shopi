@@ -2,22 +2,47 @@ import Layout from "../../components/layout"
 import Card from "../../components/card"
 import ProductDetail from "../../components/productDetail/index"
 import { useContext } from "react"
+import { Navigate } from 'react-router-dom'
 import { ShoppingCartContext } from "../../components/contextx"
+import { ShopContext } from "../../Context"
 
 
 function Home() {
     const context = useContext(ShoppingCartContext)
+    const authContext = useContext(ShopContext)
+
+    if (!authContext.account?.email) {
+        return <Navigate to="/sign-in" />
+    }
+
     const renderView = () => {
-      if(context.filteredItems?.length > 0) {
-        return context.filteredItems.map((item) => (
-          <Card key={item.id} data={item} />
-        ));
+      if (!context.items) {
+        return (
+          <div className="flex items-center justify-center w-full text-2xl">
+            Loading products...
+          </div>
+        );
       }
+
+      const itemsToRender = context.filteredItems || context.items;
       
-      if(context.searchByTitle?.length > 0 || context.selectedCategory) {
-        return <div className="flex items-center justify-center w-full text-2xl">No results found</div>;
+      if (itemsToRender.length === 0) {
+        if (context.searchByTitle || context.selectedCategory) {
+          return (
+            <div className="flex items-center justify-center w-full text-2xl">
+              No results found
+            </div>
+          );
+        } else {
+          return (
+            <div className="flex items-center justify-center w-full text-2xl">
+              No products available
+            </div>
+          );
+        }
       }
-      return context.items?.map((item) => (
+
+      return itemsToRender.map((item) => (
         <Card key={item.id} data={item} />
       ));
     }

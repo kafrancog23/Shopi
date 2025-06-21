@@ -2,21 +2,21 @@ import { useContext, useState } from 'react'
 import { Link, Navigate } from 'react-router-dom'
 import Layout from '../../components/layout'
 import { ShopContext } from '../../Context'
-import './index.css'
 
-function SignIn() {
+function SignUp() {
     const context = useContext(ShopContext)
+    const [name, setName] = useState('')
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState(null)
 
     const handleSubmit = (e) => {
         e.preventDefault()
-        if (!email || !password) {
+        if (!name || !email || !password) {
             setError('Please fill in all fields')
             return
         }
-        const result = context.handleSignIn(email, password)
+        const result = context.handleSignUp(name, email, password)
         if (!result.success) {
             setError(result.error)
             return
@@ -33,7 +33,7 @@ function SignIn() {
                 <div className="rounded-lg bg-white formLogin">
                     <div>
                         <h2 className="text-center text-3xl font-bold tracking-tight text-gray-900">
-                            Welcome
+                            Create your account
                         </h2>
                     </div>
                     <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
@@ -43,6 +43,21 @@ function SignIn() {
                             </div>
                         )}
                         <div className="space-y-4 rounded-md">
+                            <div>
+                                <label htmlFor="name" className="sr-only">
+                                    Full Name
+                                </label>
+                                <input
+                                    id="name"
+                                    name="name"
+                                    type="text"
+                                    required
+                                    className="p-2 relative block w-full rounded-[12px] border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
+                                    placeholder="Full Name"
+                                    value={name}
+                                    onChange={(e) => setName(e.target.value)}
+                                />
+                            </div>
                             <div>
                                 <label htmlFor="email-address" className="sr-only">
                                     Email address
@@ -67,7 +82,7 @@ function SignIn() {
                                     id="password"
                                     name="password"
                                     type="password"
-                                    autoComplete="current-password"
+                                    autoComplete="new-password"
                                     required
                                     className="p-2 relative block w-full rounded-[12px] border-0 py-1.5 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:z-10 focus:ring-2 focus:ring-inset focus:ring-black sm:text-sm sm:leading-6"
                                     placeholder="Password"
@@ -82,27 +97,17 @@ function SignIn() {
                                 type="submit"
                                 className="w-full h-[56px] bg-black text-white text-base rounded-[12px] font-medium hover:bg-gray-800 transition-colors"
                             >
-                                Log in
+                                Create Account
                             </button>
                         </div>
 
-                        <div className="flex items-center justify-center">
-                            <div className="text-sm">
-                                <Link
-                                    to="/forgot-password"
-                                    className="font-medium text-indigo-600 hover:text-indigo-500"
-                                >
-                                    Forgot your password?
-                                </Link>
-                            </div>
-                        </div>
-
                         <div className="text-center text-sm">
-                            <Link 
-                                to="/sign-up"
-                                className="text-sm underline underline-offset-4"
+                            <span className="text-gray-500">Already have an account? </span>
+                            <Link
+                                to="/sign-in"
+                                className="font-medium text-indigo-600 hover:text-indigo-500"
                             >
-                                 no account? sign up
+                                Sign in
                             </Link>
                         </div>
                     </form>
@@ -112,4 +117,4 @@ function SignIn() {
     )
 }
 
-export default SignIn
+export default SignUp
